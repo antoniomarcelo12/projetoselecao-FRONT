@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const RegisterFormContainer = styled.div`
+export const RegisterFormContainer = styled.form`
     width: 22rem;
     height: 42rem;
 
@@ -36,6 +36,16 @@ export const RegisterFormContainer = styled.div`
 
     .spanRegister {
         margin-top: 4rem;
+    }
+
+    .errorMessage {
+        color: red;
+        margin-bottom: 1rem;
+    }
+    
+    .successMessage {
+        color: green;
+        margin-bottom: 1rem;
     }
     
     .hintUnmatchedPasswords {

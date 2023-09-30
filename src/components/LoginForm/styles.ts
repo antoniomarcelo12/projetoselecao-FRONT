@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const LoginFormContainer = styled.div`
+export const LoginFormContainer = styled.form`
     width: 22rem;
     height: 32rem;
 
@@ -27,6 +27,11 @@ export const LoginFormContainer = styled.div`
         &:focus {
             outline: 1px solid gray;
         }
+    }
+
+    .loginError {
+        color: red;
+        margin-bottom: 1rem;
     }
 
     button {
