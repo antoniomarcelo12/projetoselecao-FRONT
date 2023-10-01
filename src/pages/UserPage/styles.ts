@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const UserPageContainer = styled.div`
-    height: 100vh;
     
+    margin-top: 2rem;
     display: flex;
     flex-direction: column;
     align-items:center;
@@ -12,7 +12,7 @@ export const UserPageContainer = styled.div`
 
     h3 {
         font-weight: lighter;
-        margin-bottom: 1rem;
+        margin-bottom: 6rem;
     }
 `
 

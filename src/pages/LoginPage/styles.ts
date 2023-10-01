@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const LoginPageContainer = styled.div`
-    height: calc(100vh - 80px);
+    height: 100vh;
 
     display: flex;
     justify-content: center;

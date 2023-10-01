@@ -21,6 +21,8 @@ export function CreateRequestForm() {
             window.alert("Erro de comunicação com o servidor.")
         }
 
+        auth.handleReload()
+
     }
 
     function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {

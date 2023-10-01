@@ -36,8 +36,13 @@ export const useApi = () => ({
       createNewRequest: async (userId: string, requestType: string) => {
         const createNewRequestResponse = await api.post('/create', {userId, requestType})
         return createNewRequestResponse
-        
       },
+
+      getRequestsByUserId: async(token: string) => {
+        const requests = await api.get('/get/requests', {headers: {'Authorization': `Bearer ${token}`}})
+
+        return requests
+      }
      
   
   })

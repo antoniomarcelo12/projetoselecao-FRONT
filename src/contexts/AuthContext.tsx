@@ -17,6 +17,8 @@ interface AuthContextType {
     handleSetSessionToken(token: string): void;
     user: User,
     handleSetUser(user: User): void;
+    reload: boolean;
+    handleReload: () => void;
 }
 
 export const AuthContext = createContext<AuthContextType>({} as AuthContextType)
@@ -25,6 +27,7 @@ export function AuthProvider({ children }: AuthProviderProps ) {
 
     const [user, setUser] = useState<User>({} as User)
     const [sessionToken, setSessionToken] = useState('')
+    const [reload, setReload] = useState(false)
     const api = useApi()
 
     useEffect(() => {
@@ -32,6 +35,7 @@ export function AuthProvider({ children }: AuthProviderProps ) {
             const storageData = localStorage.getItem('authToken')
             if(storageData) {
                 const data: User = await api.getUserProfileByToken(storageData)
+                handleSetSessionToken(storageData)
                 
                 if(data) {
                     handleSetUser(data)
@@ -42,6 +46,7 @@ export function AuthProvider({ children }: AuthProviderProps ) {
         validateToken()
     }, [])
 
+ 
 
     function handleSetUser(user: User) {
         setUser(user)
@@ -51,9 +56,12 @@ export function AuthProvider({ children }: AuthProviderProps ) {
         setSessionToken(token)
     }
 
+    function handleReload(){
+        setReload(!reload)
+    }
 
     return(
-        <AuthContext.Provider value={{user, handleSetUser, sessionToken, handleSetSessionToken}}>
+        <AuthContext.Provider value={{user, handleSetUser, sessionToken, handleSetSessionToken, reload, handleReload}}>
             { children }
         </AuthContext.Provider>
     );

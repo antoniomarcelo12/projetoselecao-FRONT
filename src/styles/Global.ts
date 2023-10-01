@@ -8,8 +8,4 @@ export const GlobalStyles = createGlobalStyle`
         
         font-family: 'Inter'
     }
-
-    body {
-        height: 100vh;
-    }
 `

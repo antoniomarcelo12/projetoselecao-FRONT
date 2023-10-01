@@ -12,6 +12,7 @@ export const CreateRequestFormContainer = styled.form`
 
 
     background-color: lightgray;
+    margin-bottom: 5rem;
 
     label {
         margin-top: 1.5rem;
