@@ -97,7 +97,7 @@ export function ViewRequestList() {
                 </tr>
                 </thead>
                             {   
-                                allRequests?.length === 0 || (searchFilter.length > 0 && allRequestsFiltered.length == 0) && (
+                                (allRequests?.length === 0 || (searchFilter.length > 0 && allRequestsFiltered.length == 0)) && (
 
                                                     <tbody>
                                                         <tr>
