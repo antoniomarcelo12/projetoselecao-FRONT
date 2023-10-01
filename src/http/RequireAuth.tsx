@@ -9,8 +9,7 @@ interface RequireAuthProps {
 export function RequireAuth({ children }: RequireAuthProps) {
     const auth = useContext(AuthContext)
 
-
-    if(!auth.sessionToken) {
+    if(!auth.sessionToken && !auth.user.user_id) {
         return (
             <LoginPage />
         )

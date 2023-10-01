@@ -16,20 +16,19 @@ export function LoginForm() {
     async function handleLogin(e: React.FormEvent<EventTarget>) {
         e.preventDefault()
 
-        try{
-            const { token } = await api.login(userName, userPassword)
+        const loginResponse  = await api.login(userName, userPassword)
 
-            if(token) {
-                const currentUserData = await api.getUserProfileByToken(token)
-                
-                auth.handleSetSessionToken(token)
-                auth.handleSetUser(currentUserData)
+        if(typeof(loginResponse) === 'string') {
+            const errorMessage = loginResponse
+            setError(errorMessage)
+            
+        }else {
+            const currentUserData = await api.getUserProfileByToken(loginResponse.token)
+            
+            auth.handleSetSessionToken(loginResponse.token)
+            auth.handleSetUser(currentUserData)
 
-                navigate('/userhome')
-            }
-       }catch(err) {
-            //FIXME:
-            setError(err?.response.data.message)
+            navigate('/userhome')
         }
     }
 
