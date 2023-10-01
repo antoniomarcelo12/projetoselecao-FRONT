@@ -5,11 +5,10 @@ import { UserPage } from './pages/UserPage';
 import { RequireAuth } from './http/RequireAuth';
 import { useContext } from 'react';
 import { AuthContext } from './contexts/AuthContext';
-import { GerenciaPage } from './pages/GerenciaPage';
+import { AdmPage } from './pages/AdmPage';
 
 export function Router() {
     const auth = useContext(AuthContext)
-
     return(
         <Routes>
             <Route path='/' element={ <LoginPage /> } />
@@ -19,10 +18,9 @@ export function Router() {
                 auth.user.user_type === 'aluno' &&
                     <Route path='/userhome' element={ <RequireAuth> <UserPage /> </RequireAuth> } />
             }
-            {
-                auth.user.user_type === 'gerencia' || auth.user.user_type === 'secretaria' &&
-                    <Route path='/gerenciahome' element={ <RequireAuth> <GerenciaPage /> </RequireAuth> } />
-            }
+            
+            <Route path='/gerenciahome' element={ <RequireAuth> <AdmPage /> </RequireAuth> } />
+            
 
 
         </Routes>

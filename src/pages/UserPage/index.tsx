@@ -16,7 +16,7 @@ export function UserPage() {
 
     return (
             <UserPageContainer>
-                <h3>Seja bem vindo, {auth.user.user_name}!</h3>
+                <h3>Seja bem vindo(a), {auth.user.user_name}!</h3>
                 <CreateRequestForm />
                 <ViewRequestList />
                 <LogoutButton onClick={handleLogout}>Sair</LogoutButton>
