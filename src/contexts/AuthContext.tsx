@@ -46,8 +46,6 @@ export function AuthProvider({ children }: AuthProviderProps ) {
         validateToken()
     }, [])
 
- 
-
     function handleSetUser(user: User) {
         setUser(user)
     }

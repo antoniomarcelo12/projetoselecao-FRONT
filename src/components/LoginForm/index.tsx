@@ -33,8 +33,6 @@ export function LoginForm() {
             }else{
                 navigate('/gerenciahome')
             }
-
-
         }
     }
 

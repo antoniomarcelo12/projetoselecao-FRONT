@@ -26,10 +26,6 @@ export const UserPageContent = styled.div`
     }
 `
 
-export const ViewRequestContainer = styled.div`
-
-`
-
 export const LogoutButton = styled.button`
     height: 2rem;
     width: 4rem;

@@ -8,5 +8,4 @@ export const HeaderContainer = styled.form`
     justify-content: center;
     align-items: center;
     gap: 3rem;
-
 `

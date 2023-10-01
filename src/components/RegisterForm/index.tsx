@@ -3,7 +3,6 @@ import { RegisterFormContainer } from "./styles";
 import { useState } from "react";
 import { useApi } from "../../http/api";
 
-
 let responseUserData: {code: number}
 export function RegisterForm() {
 
@@ -31,10 +30,7 @@ export function RegisterForm() {
             setError(err.response.data.message)
             setSuccess(null)
         }
-            
-        }
-
-
+    }
 
     return(
         <RegisterFormContainer onSubmit={handleRegister}>
@@ -63,7 +59,6 @@ export function RegisterForm() {
                 }
                 
                 <button disabled={!isPasswordsMatching || !userPassword} type="submit">Register</button> <span className="spanRegister">Já tem um cadastro? <Link to="/">Login</Link> </span>
-
 
         </RegisterFormContainer>
     )

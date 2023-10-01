@@ -3,7 +3,6 @@ import { CreateRequestFormContainer } from "./styles";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useApi } from "../../http/api";
 
-
 export function CreateRequestForm() {
 
     const [requestType, setRequestType] = useState('')
@@ -34,7 +33,7 @@ export function CreateRequestForm() {
         <CreateRequestFormContainer onSubmit={handleSubmit}>
 
             <label htmlFor="atividadecomplementar">Atividade Complementar</label>
-            <input type="radio" id="atividadecomplementar" value="atividadecomplementar" name="requestType" onChange={(e) => handleInputChange(e)} /> 
+            <input type="radio" id="atividadecomplementar" value="atividade complementar" name="requestType" onChange={(e) => handleInputChange(e)} /> 
             
             <label htmlFor="dispensadedisciplina">dispensa de disciplina</label>
             <input type="radio" id="dispensadedisciplina" value="dispensa de disciplina" name="requestType" onChange={(e) => handleInputChange(e)} />

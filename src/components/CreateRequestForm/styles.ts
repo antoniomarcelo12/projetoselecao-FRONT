@@ -9,8 +9,6 @@ export const CreateRequestFormContainer = styled.form`
     align-items: center;
     justify-content: center;
 
-
-
     background-color: lightgray;
     margin-bottom: 5rem;
 
