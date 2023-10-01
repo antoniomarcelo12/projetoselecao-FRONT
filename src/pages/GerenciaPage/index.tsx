@@ -1,11 +1,10 @@
 import { useContext } from "react";
-import { CreateRequestForm } from "../../components/CreateRequestForm/indext";
 import { LogoutButton, UserPageContainer } from "./styles";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import { ViewRequestList } from "../../components/ViewRequestList";
 
-export function UserPage() {
+export function GerenciaPage() {
     const navigate = useNavigate()
     const auth = useContext(AuthContext)
     
@@ -17,7 +16,6 @@ export function UserPage() {
     return (
             <UserPageContainer>
                 <h3>Seja bem vindo, {auth.user.user_name}!</h3>
-                <CreateRequestForm />
                 <ViewRequestList />
                 <LogoutButton onClick={handleLogout}>Sair</LogoutButton>
             </UserPageContainer>

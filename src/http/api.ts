@@ -42,6 +42,15 @@ export const useApi = () => ({
         const requests = await api.get('/get/requests', {headers: {'Authorization': `Bearer ${token}`}})
 
         return requests
+      },
+
+      getAllRequests: async(token: string) => {
+        const allRequests = await api.get('/get/allrequests', {headers: {'Authorization': `Bearer ${token}`}})
+        return allRequests
+      },
+
+      toggleRequestDone: async(token: string, taskId: string) => {
+        await api.put(`/request/?requestId=${taskId}`, {}, {headers: {'Authorization': `Bearer ${token}`}})
       }
      
   

@@ -28,7 +28,13 @@ export function LoginForm() {
             auth.handleSetSessionToken(loginResponse.token)
             auth.handleSetUser(currentUserData)
 
-            navigate('/userhome')
+            if(currentUserData.user_type === 'aluno'){
+                navigate('/userhome')
+            }else{
+                navigate('/gerenciahome')
+            }
+
+
         }
     }
 
