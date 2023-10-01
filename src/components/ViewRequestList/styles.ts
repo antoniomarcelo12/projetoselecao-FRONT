@@ -2,14 +2,27 @@ import styled from "styled-components";
 
 export const ViewRequestListContainer = styled.table`
     
-    width: 90%;
-    height: auto;
+    width: 80%;
+    overflow-x: scroll;
 
     text-align: center;
+
+    position: relative;
 
     tr {
         line-height: 2rem;
     }
+    td {
+        border-bottom: 1px solid black;
+    }
 
-    /* background-color: red; */
+    .nothingToShow {
+        position: absolute;
+        top: 4rem;
+        left: calc(50% - 40px);
+    }
+
+    @media (max-width: 768px) {
+        font-size: .5rem;
+    }
 `

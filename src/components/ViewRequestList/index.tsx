@@ -38,12 +38,17 @@ export function ViewRequestList() {
                 <th>RequestId</th>
                 <th>requestType</th>
                 <th>createdAt</th>
-                <th>closedAt</th>
                 <th>Situation</th>
                 <th>targetDepartment</th>
             </tr>
             </thead>
-            {
+            {   allRequests?.length === 0 ? (
+                <tbody>
+                    <tr>
+                        <td className="nothingToShow">Nada para mostrar aqui.</td>
+                    </tr>
+                </tbody>
+            ) : (
                 allRequests?.map((item) => {
                     return(
                         <tbody key={item.request_id}>
@@ -51,13 +56,14 @@ export function ViewRequestList() {
                                 <td>{ item.request_id }</td>
                                 <td>{item.request_type}</td>
                                 <td>{item.request_created_at}</td>
-                                <td>{item.request_close_date}</td>
                                 <td>{item.request_situation}</td>
                                 <td>{item.request_target_department}</td>
                             </tr>
+                            
                         </tbody>
                     );
                 })
+            )
             }
         </ViewRequestListContainer>
     );

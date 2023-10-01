@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const UserPageContainer = styled.div`
     
     margin-top: 2rem;
+    margin-bottom: 5rem;
     display: flex;
     flex-direction: column;
     align-items:center;
@@ -35,4 +36,14 @@ export const LogoutButton = styled.button`
     position: absolute;
     top: 2rem;
     right: 2rem;
+
+    @media (max-width: 768px) {
+        height: 1rem;
+        width: 2rem;
+        font-size: .5rem;
+
+        top: -.5rem;
+        right: 1rem;
+        
+    }
 `

@@ -16,9 +16,9 @@ export function CreateRequestForm() {
         e.preventDefault()
         try {
             await api.createNewRequest(auth.user.user_id, requestType)
-            window.alert("Pedido cadastrado com sucesso.")
+            window.alert("Pedido cadastrado com sucesso. Aguarde.")
         }catch(err){
-            window.alert("Erro de comunicação com o servidor.")
+            window.alert(err.response.data.message)
         }
 
         auth.handleReload()
