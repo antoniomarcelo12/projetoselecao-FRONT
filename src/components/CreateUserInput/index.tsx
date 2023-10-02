@@ -8,12 +8,12 @@ export function CreateUserInput() {
     const allUsersContext = useContext(AllUsersContext)
 
     const [user, setUser] = useState<User>({
-        user_fullname: "teste",
-        user_name: "teste",
+        user_fullname: "",
+        user_name: "",
         user_age: 0,
-        user_email: "teste@teste.com",
-        user_ocupation: "teste",
-        user_phone: "teste",
+        user_email: "",
+        user_ocupation: "",
+        user_phone: "",
         })
 
     function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
