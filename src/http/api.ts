@@ -1,57 +1,44 @@
 import axios from "axios";
+import { User } from "../@types/User";
 
 const api = axios.create({
     baseURL: 'http://localhost:3333/',
 })
 
-interface LoginResponseSuccessType {
-    token: string
-}
-
 export const useApi = () => ({
- 
-    register: async(userEmail: string, userPassword: string, userName: string) => {
-      const response = await api.post('/register', {userEmail, userPassword, userName})
-      return response.data
-    },
 
-    login: async(userName: string, userPassword: string): Promise<LoginResponseSuccessType | string> => {
-      try{
-        const response = await api.post('/login', {userName, userPassword})
+      createNewUser: async (user: User) => {
+        const createNewUserResponse = await api.post('/create', user)
+        return createNewUserResponse
+      },
 
-        localStorage.setItem('authToken', response.data.token)
+      getAllUsers: async (): Promise<User[]> => {
+        const allUsers = await api.get('/users')
+        return allUsers.data.users
+      },
 
-        return response.data
-        
-      } catch(err) {
-        return err.response.data.message
+      deleteUser: async (userId: string) => {
+        console.log("USERDATA TO DELETE: ", userId)
+        await api.delete(`/user/?userid=${userId}`)
+      },
+
+      updateUser: async(userData: User) => {
+        await api.put(`/user/?userid=${userData.user_id}`, userData)
       }
-    },
 
-      getUserProfileByToken: async(token: string) => {
-      const userData = await api.get('/me', {headers: {'Authorization': `Bearer ${token}`}})
-      return userData.data.user
-    },
 
-      createNewRequest: async (userId: string, requestType: string) => {
-        const createNewRequestResponse = await api.post('/create', {userId, requestType})
-        return createNewRequestResponse
-      },
 
-      getRequestsByUserId: async(token: string) => {
-        const requests = await api.get('/get/requests', {headers: {'Authorization': `Bearer ${token}`}})
 
-        return requests
-      },
 
-      getAllRequests: async(token: string) => {
-        const allRequests = await api.get('/get/allrequests', {headers: {'Authorization': `Bearer ${token}`}})
-        return allRequests
-      },
+      //FIXME:
+      // getUserByUserId: async(token: string) => {
+      //   const requests = await api.get('/get/requests', {headers: {'Authorization': `Bearer ${token}`}})
 
-      toggleRequestDone: async(token: string, taskId: string) => {
-        await api.put(`/request/?requestId=${taskId}`, {}, {headers: {'Authorization': `Bearer ${token}`}})
-      }
-     
-  
-  })
+      //   return requests
+      // },
+
+      // getAllUsers: async(token: string) => {
+      //   const allRequests = await api.get('/get/allrequests', {headers: {'Authorization': `Bearer ${token}`}})
+      //   return allRequests
+      // },
+})
