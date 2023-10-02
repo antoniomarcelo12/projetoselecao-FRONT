@@ -9,6 +9,10 @@ export const GlobalStyles = createGlobalStyle`
         font-family: 'Inter', sans-serif
     }
 
+    html {
+        height: 100vh;
+    }
+
     a {
         color: black;
     }

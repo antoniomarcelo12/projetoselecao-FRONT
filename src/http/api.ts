@@ -8,8 +8,19 @@ const api = axios.create({
 export const useApi = () => ({
 
       createNewUser: async (user: User) => {
-        const createNewUserResponse = await api.post('/create', user)
-        return createNewUserResponse
+        try {
+          const createNewUserResponse = await api.post('/create', user)
+          window.alert("usuario cadastrado com sucesso.")
+          return createNewUserResponse
+        } catch(err) {
+          if(err.response.data.message === "User already exists."){
+            window.alert("Usuário já existe.")
+          }
+
+          if(err.response.data.message === "Validation error."){
+            window.alert("Informações inválidas. Verifique e tente novamente.")
+          }
+        }
       },
 
       getAllUsers: async (): Promise<User[]> => {
@@ -18,27 +29,22 @@ export const useApi = () => ({
       },
 
       deleteUser: async (userId: string) => {
-        console.log("USERDATA TO DELETE: ", userId)
-        await api.delete(`/user/?userid=${userId}`)
+
+        try{
+          await api.delete(`/user/?userid=${userId}`)
+          window.alert("usuario excluido com sucesso.")
+
+        }catch(err) {
+          window.alert(err)
+        }
       },
-
+      
       updateUser: async(userData: User) => {
-        await api.put(`/user/?userid=${userData.user_id}`, userData)
+        try {
+          await api.put(`/user/?userid=${userData.user_id}`, userData)
+          
+        } catch(err){
+          window.alert(err)
+        }
       }
-
-
-
-
-
-      //FIXME:
-      // getUserByUserId: async(token: string) => {
-      //   const requests = await api.get('/get/requests', {headers: {'Authorization': `Bearer ${token}`}})
-
-      //   return requests
-      // },
-
-      // getAllUsers: async(token: string) => {
-      //   const allRequests = await api.get('/get/allrequests', {headers: {'Authorization': `Bearer ${token}`}})
-      //   return allRequests
-      // },
 })

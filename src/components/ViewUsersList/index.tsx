@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { User } from "../../@types/User";
-import { ViewUsersListContainer } from "./styles";
+import { TablePageContainer, ViewUsersListContainer } from "./styles";
 import { AllUsersContext } from "../../contexts/AllUsersContext";
 
 export function ViewUsersList() {
@@ -8,6 +8,7 @@ export function ViewUsersList() {
     const allUsersContext = useContext(AllUsersContext)
     
     const [updatingUser, setUpdatingUser] = useState<User>()
+
     
     function handleInputChange(e: React.ChangeEvent<HTMLInputElement>, user_id: string) {
         
@@ -47,8 +48,10 @@ export function ViewUsersList() {
     }
 
     return(
-        <>
+        <TablePageContainer>
             <ViewUsersListContainer>
+                {
+                    allUsersContext.allUsers.length > 0 &&
                 <thead>
                 <tr>
                     <th>Nome completo</th>
@@ -61,8 +64,15 @@ export function ViewUsersList() {
                 </tr>
                 </thead>
 
+                }
+
                 <tbody>
-                    {
+                    {   
+                        allUsersContext.allUsers?.length === 0 ? (
+                            <tr className="nothingToShow">
+                                <td>Nothing to show here.</td>
+                            </tr>
+                        ) : (
                         allUsersContext.allUsers?.map((user) => {
 
                             return(
@@ -107,10 +117,10 @@ export function ViewUsersList() {
                                         <td> <button onClick={() => handleDeleteUser(user.user_id!)}>Delete</button> </td>
                                     </tr>
                             )
-                        })
+                        }))
                     }
                 </tbody>
             </ViewUsersListContainer>
-        </>
+        </TablePageContainer>
     );
 }

@@ -2,27 +2,25 @@ import styled from "styled-components";
 
 export const ViewUsersListContainer = styled.table`
     
-    width: 80%;
-    overflow-x: scroll;
-    text-align: center;
+    overflow: scroll;
     position: relative;
 
-    tr {
-        line-height: 1.5rem;
+    input {
+        height: 2rem;
+    }
+
+    .nothingToShow {
         
+        position: absolute;
+        left: 35vw;
+        top: 5rem;
+        min-width: 720px;
+
     }
+`
 
-    td {
-        border-bottom: 1px solid black;
-    }
-
-    .tableItem {
-        display: flex;
-    }
-
-    @media (max-width: 768px) {
-        font-size: .5rem;
-    }
-
-
+export const TablePageContainer = styled.div`
+        height: 380px;
+        max-width: 87%;
+        overflow: auto;
 `
