@@ -1,46 +1,52 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { User } from "../../@types/User";
 import { TablePageContainer, ViewUsersListContainer } from "./styles";
 import { AllUsersContext } from "../../contexts/AllUsersContext";
+import { EditModalComponent } from "../EditModalComponent";
 
 export function ViewUsersList() {
 
     const allUsersContext = useContext(AllUsersContext)
     
-    const [updatingUser, setUpdatingUser] = useState<User>()
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
+    const [updatingUser, setUpdatingUser] = useState<User>({
+        user_id: "",
+        user_fullname: "",
+        user_name: "",
+        user_age: 0,
+        user_email: "",
+        user_ocupation: "",
+        user_phone: "",
+    })
+
+    useEffect(() => {
+        console.log(allUsersContext.allUsers)
+    }, [])
+
+
+    function handleOpenEditModal() {
+        setIsModalOpen(true);
+      }
     
-    function handleInputChange(e: React.ChangeEvent<HTMLInputElement>, user_id: string) {
-        
-        const newAllUsers = allUsersContext.allUsers.map((user) => {
-            let userChanged: User | undefined
+      function handleCloseEditModal() {
+        setIsModalOpen(false);
+      }
 
-            if(user.user_id === user_id) {
 
-                if(e.target.name === 'user_age'){
-                    const numberAge = Number(e.target.value.replace(/\D/g, ''));
-                    userChanged = {
-                        ...user,
-                        [e.target.name]: numberAge
-                    }
-                }else {
-                    userChanged = {
-                        ...user,
-                        [e.target.name]: e.target.value
-                    }
-                }
-                setUpdatingUser(userChanged)
-                return userChanged
-            }
 
-            return user
-        })
-
-        allUsersContext.handleEditAllUsersState(newAllUsers)
+    function handleEditUpdatingUser(e: React.ChangeEvent<HTMLInputElement>) {
+        setUpdatingUser((prev) => ({
+            ...prev,
+            [e.target.name]: e.target.value,
+          }));
     }
 
-    function submitEditUser() {
-        allUsersContext.handleUpdateUser(updatingUser!)
+
+    
+    function handleEditUserModal(user: User) {
+        setUpdatingUser(user)
+        handleOpenEditModal()
     }
 
     function handleDeleteUser(userId: string) {
@@ -67,60 +73,46 @@ export function ViewUsersList() {
                 }
 
                 <tbody>
-                    {   
-                        allUsersContext.allUsers?.length === 0 ? (
+                    {
+                        allUsersContext.allUsers?.length === 0 && (
                             <tr className="nothingToShow">
                                 <td>Nothing to show here.</td>
                             </tr>
-                        ) : (
+                        )
+                    }
+
+
+                    {
+                        allUsersContext.allUsers &&
                         allUsersContext.allUsers?.map((user) => {
 
                             return(
                                     <tr key={user.user_id}>
-                                        <td>  <input    type="text" 
-                                                        name="user_fullname" 
-                                                        value={user?.user_fullname} 
-                                                        onChange={(e) => handleInputChange(e, user.user_id!)} />
-                                        </td>
+                                        <td>{user?.user_fullname}</td>
 
-                                        <td>  <input    type="text" 
-                                                        name="user_name" 
-                                                        value={user.user_name} 
-                                                        onChange={(e) => handleInputChange(e, user.user_id!)}/>
-                                        </td>
+                                        <td>{user.user_name}</td>
 
-                                        <td>  <input    type="text" 
-                                                        name="user_age" 
-                                                        value={user.user_age} 
-                                                        onChange={(e) => handleInputChange(e, user.user_id!)}/>
-                                        </td>
+                                        <td>{user.user_age}</td>
 
-                                        <td>  <input    type="text" 
-                                                        name="user_email" 
-                                                        value={user.user_email} 
-                                                        onChange={(e) => handleInputChange(e, user.user_id!)}/>
-                                        </td>
+                                        <td>{user.user_email}</td>
 
-                                        <td>  <input    type="text" 
-                                                        name="user_ocupation" 
-                                                        value={user.user_ocupation} 
-                                                        onChange={(e) => handleInputChange(e, user.user_id!)}/>
-                                        </td>
+                                        <td>{user.user_ocupation}</td>
 
-                                        <td>  <input    type="text" 
-                                                        name="user_phone" 
-                                                        value={user.user_phone} 
-                                                        onChange={(e) => handleInputChange(e, user.user_id!)}/>
-                                        </td>
+                                        <td>{user.user_phone}</td>
                                         
-                                        <td> <button onClick={submitEditUser}>Edit</button> </td>
+                                        <td> <button onClick={() => handleEditUserModal(user)}>Edit</button> </td>
                                         <td> <button onClick={() => handleDeleteUser(user.user_id!)}>Delete</button> </td>
                                     </tr>
                             )
-                        }))
+                        })
                     }
                 </tbody>
-            </ViewUsersListContainer>
+                </ViewUsersListContainer>
+
+                    {
+                        isModalOpen ? <EditModalComponent updatingUser={updatingUser} handleEditUpdatingUser={handleEditUpdatingUser} isModalOpen={isModalOpen} handleCloseEditModal={handleCloseEditModal} /> : null
+                    }
+
         </TablePageContainer>
     );
 }

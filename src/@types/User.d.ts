@@ -13,7 +13,7 @@ export interface UserUnmatched {
     user_fullname?: string,
     user_name?: string,
     user_age?: number,
-    user_email?: email,
+    user_email?: string,
     user_ocupation?: string,
     user_phone?: string,
 }
