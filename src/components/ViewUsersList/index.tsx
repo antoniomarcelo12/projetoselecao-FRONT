@@ -20,7 +20,6 @@ export function ViewUsersList() {
         user_phone: "",
     })
 
-
     function handleOpenEditModal() {
         setIsModalOpen(true);
       }
