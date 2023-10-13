@@ -33,7 +33,7 @@ export const useApi = () => ({
         try{
           await api.delete(`/user/?userid=${userId}`)
           window.alert("usuario excluido com sucesso.")
-
+          
         }catch(err) {
           window.alert(err)
         }
@@ -42,6 +42,7 @@ export const useApi = () => ({
       updateUser: async(userData: User) => {
         try {
           await api.put(`/user/?userid=${userData.user_id}`, userData)
+          window.alert("usuario editado com sucesso.")
           
         } catch(err){
           window.alert(err)

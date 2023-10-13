@@ -54,7 +54,8 @@ export function CreateUserInput() {
                         <input      type="number" 
                                     value={user.user_age}
                                     name="user_age"
-                                    onChange={(e) => handleInputChange(e)}/>
+                                    onChange={(e) => handleInputChange(e)}
+                                     />
                     </div>
                 
                     <div className="inputFieldContainer">
